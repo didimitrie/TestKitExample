@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2BEF9148-066D-4F63-9976-DBA0DCE8E5DE}</ProjectGuid>
+    <ProjectGuid>{8DFDC29A-ACA7-4479-A82B-C58B2AB5F15D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SuperObjectModel</RootNamespace>
-    <AssemblyName>SuperObjectModel</AssemblyName>
+    <RootNamespace>SuperObjectModelBuilder</RootNamespace>
+    <AssemblyName>SuperObjectModelBuilder</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,15 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseSchemas.cs" />
+    <Compile Include="Base.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpeckleCore\SpeckleCore\SpeckleCore.csproj">
-      <Project>{cfe27d3d-8a1a-43f9-9387-8fd9e119e174}</Project>
-      <Name>SpeckleCore</Name>
-      <Private>False</Private>
+    <ProjectReference Include="..\SuperObjectModel\SuperObjectModel.csproj">
+      <Project>{2bef9148-066d-4f63-9976-dba0dce8e5de}</Project>
+      <Name>SuperObjectModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>if not exist %25localappdata%25\SpeckleKitsDebug\$(ProjectName) mkdir %25localappdata%25\SpeckleKitsDebug\$(ProjectName)
+
+Copy "$(TargetDir)\*.dll" "%25localappdata%25\SpeckleKitsDebug\$(ProjectName)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
